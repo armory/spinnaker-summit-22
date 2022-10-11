@@ -14,3 +14,8 @@ components:
 patchesStrategicMerge:
   # TODO create this
   - ./version.yml
+
+patches:
+  - target:
+      kind: SpinnakerService
+    path: ./switch-to-oss.yml

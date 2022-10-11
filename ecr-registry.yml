@@ -1,0 +1,14 @@
+- op: replace
+  path: /spec/spinnakerConfig/config/providers/dockerRegistry/accounts/0/repositories
+  value:
+    - spinnaker-summit-22
+- op: replace
+  path: /spec/spinnakerConfig/config/providers/dockerRegistry/accounts/0/address
+  value: 133470739014.dkr.ecr.us-west-2.amazonaws.com
+- op: replace
+  path: /spec/spinnakerConfig/config/providers/dockerRegistry/accounts/0/passwordCommand
+  value: |-
+    aws --region us-west-2 ecr get-authorization-token \
+        --output text --query 'authorizationData[].authorizationToken' \
+      | base64 -d \
+      | sed 's/^AWS://'

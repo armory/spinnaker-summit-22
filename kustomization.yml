@@ -5,17 +5,19 @@ namespace: spinnaker
 
 components:
   - git@github.com:armory/spinnaker-kustomize-patches.git/core/base
-  # TODO doesn't exist yet
-  #- git@github.com:armory/spinnaker-kustomize-patches.git/core/persistence/s3?ref=feat/add-s3-persistence-component
   - git@github.com:armory/spinnaker-kustomize-patches.git/targets/kubernetes/default
-  #- git@github.com:armory/spinnaker-kustomize-patches.git/targets/aws/base
-  #- git@github.com:armory/spinnaker-kustomize-patches.git/artifacts/docker/ecr?ref=feat/add-dockerhub-component
+  # TODO needs docs upstream
+  - git@github.com:armory/spinnaker-kustomize-patches.git/core/persistence/s3?ref=feat/add-s3-persistance-component
+  - git@github.com:armory/spinnaker-kustomize-patches.git/artifacts/docker/ecr?ref=feat/add-dockerhub-component
 
 patchesStrategicMerge:
-  # TODO create this
   - ./version.yml
+  - ./s3-bucket.yml
 
 patches:
   - target:
       kind: SpinnakerService
     path: ./switch-to-oss.yml
+  - target:
+      kind: SpinnakerService
+    path: ./ecr-registry.yml

@@ -13,6 +13,7 @@ components:
 patchesStrategicMerge:
   - ./version.yml
   - ./s3-bucket.yml
+  #- ./load-balancer.yml
 
 patches:
   - target:

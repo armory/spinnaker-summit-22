@@ -4,11 +4,11 @@ kind: Kustomization
 namespace: spinnaker
 
 components:
-  - git@github.com:armory/spinnaker-kustomize-patches.git/core/base
-  - git@github.com:armory/spinnaker-kustomize-patches.git/targets/kubernetes/default
+  - https://github.com/armory/spinnaker-kustomize-patches.git/core/base
+  - https://github.com/armory/spinnaker-kustomize-patches.git/targets/kubernetes/default
   # TODO needs docs upstream
-  - git@github.com:armory/spinnaker-kustomize-patches.git/core/persistence/s3?ref=feat/add-s3-persistance-component
-  - git@github.com:armory/spinnaker-kustomize-patches.git/artifacts/docker/ecr?ref=feat/add-dockerhub-component
+  - https://github.com/armory/spinnaker-kustomize-patches.git/core/persistence/s3?ref=feat/add-s3-persistance-component
+  - https://github.com/armory/spinnaker-kustomize-patches.git/artifacts/docker/ecr?ref=feat/add-dockerhub-component
 
 patchesStrategicMerge:
   - ./version.yml

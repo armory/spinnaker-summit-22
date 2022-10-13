@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: &app-name hello-world
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 80
+      name: http
+  selector:
+    app: *app-name
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app-name hello-world
+spec:
+  selector:
+    matchLabels:
+      app: *app-name
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: *app-name
+    spec:
+      containers:
+        - name: nginx
+          image: 133470739014.dkr.ecr.us-west-2.amazonaws.com/spinnaker-summit-22:${trigger['tag']}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80

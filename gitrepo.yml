@@ -1,0 +1,13 @@
+apiVersion: spinnaker.armory.io/v1alpha2
+kind: SpinnakerService
+metadata:
+  name: spinnaker
+spec:
+  spinnakerConfig:
+    config:
+      artifacts:
+        gitrepo:
+          enabled: true
+          accounts:
+          - name: github
+            token: encrypted:k8s!n:spin-secrets!k:github-token

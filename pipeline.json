@@ -1,0 +1,154 @@
+{
+  "keepWaitingPipelines": false,
+  "lastModifiedBy": "anonymous",
+  "limitConcurrent": true,
+  "schema": "1",
+  "spelEvaluator": "v4",
+  "stages": [
+    {
+      "expectedArtifacts": [
+        {
+          "defaultArtifact": {
+            "customKind": true,
+            "id": "7ea243eb-0b45-4c02-bcce-d170981081e5"
+          },
+          "displayName": "horrible-bobcat-80",
+          "id": "90d483cf-89ea-4409-97a1-9960a5409fba",
+          "matchArtifact": {
+            "artifactAccount": "embedded-artifact",
+            "customKind": false,
+            "id": "9b61726b-d641-472b-a3d5-01fffa8e8fd2",
+            "type": "embedded/base64"
+          },
+          "useDefaultArtifact": false,
+          "usePriorArtifact": false
+        }
+      ],
+      "inputArtifact": {
+        "account": "github",
+        "artifact": {
+          "artifactAccount": "github",
+          "customKind": true,
+          "id": "ef7237f8-b5e2-4966-aed2-ba809b20e525",
+          "reference": "https://github.com/armory/spinnaker-summit-22.git",
+          "type": "git/repo",
+          "version": "main"
+        }
+      },
+      "kustomizeFilePath": "overlays/test/kustomization.yaml",
+      "name": "Bake Test Manifest",
+      "overrides": {},
+      "refId": "1",
+      "requisiteStageRefIds": [],
+      "templateRenderer": "KUSTOMIZE",
+      "type": "bakeManifest"
+    },
+    {
+      "account": "spinnaker",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactId": "90d483cf-89ea-4409-97a1-9960a5409fba",
+      "moniker": {
+        "app": "spinnaker-summit-2022"
+      },
+      "name": "Deploy to Test Environment",
+      "refId": "2",
+      "requisiteStageRefIds": [
+        "1"
+      ],
+      "skipExpressionEvaluation": false,
+      "source": "artifact",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false
+        }
+      },
+      "type": "deployManifest"
+    },
+    {
+      "failPipeline": true,
+      "judgmentInputs": [],
+      "name": "Promote to Production?",
+      "notifications": [],
+      "refId": "3",
+      "requisiteStageRefIds": [
+        "2"
+      ],
+      "type": "manualJudgment"
+    },
+    {
+      "account": "spinnaker",
+      "cloudProvider": "kubernetes",
+      "manifestArtifactId": "c925a0d5-dafb-43b1-8699-cbda2c97fac5",
+      "moniker": {
+        "app": "spinnaker-summit-2022"
+      },
+      "name": "Deploy to Production Environment",
+      "namespaceOverride": "production-environment",
+      "refId": "4",
+      "requisiteStageRefIds": [
+        "5"
+      ],
+      "skipExpressionEvaluation": false,
+      "source": "artifact",
+      "trafficManagement": {
+        "enabled": false,
+        "options": {
+          "enableTraffic": false
+        }
+      },
+      "type": "deployManifest"
+    },
+    {
+      "expectedArtifacts": [
+        {
+          "defaultArtifact": {
+            "customKind": true,
+            "id": "dd3b66e2-90e4-4149-9747-1b7efc2f71ff"
+          },
+          "displayName": "fresh-wolverine-30",
+          "id": "c925a0d5-dafb-43b1-8699-cbda2c97fac5",
+          "matchArtifact": {
+            "artifactAccount": "embedded-artifact",
+            "customKind": false,
+            "id": "f2aeae1a-5d31-40a4-962f-d5d2fc4bdac2",
+            "type": "embedded/base64"
+          },
+          "useDefaultArtifact": false,
+          "usePriorArtifact": false
+        }
+      ],
+      "inputArtifact": {
+        "account": "github",
+        "artifact": {
+          "artifactAccount": "github",
+          "customKind": true,
+          "id": "f8d1ec72-dabe-4dd8-9347-8ac726a71ae8",
+          "reference": "https://github.com/armory/spinnaker-summit-22.git",
+          "type": "git/repo",
+          "version": "main"
+        }
+      },
+      "kustomizeFilePath": "overlays/production/kustomization.yaml",
+      "name": "Bake Production Manifest",
+      "overrides": {},
+      "refId": "5",
+      "requisiteStageRefIds": [
+        "3"
+      ],
+      "templateRenderer": "KUSTOMIZE",
+      "type": "bakeManifest"
+    }
+  ],
+  "triggers": [
+    {
+      "account": "ecr",
+      "enabled": true,
+      "registry": "133470739014.dkr.ecr.us-west-2.amazonaws.com",
+      "repository": "spinnaker-summit-22",
+      "tag": "",
+      "type": "docker"
+    }
+  ],
+  "updateTs": "1665678483000"
+}

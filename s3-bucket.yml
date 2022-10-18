@@ -8,3 +8,7 @@ spec:
       persistentStorage:
         s3:
           bucket: a3ad76d6-3b0a-4dce-8068-cef5f4a588f0
+    service-settings:
+      front50:
+        kubernetes:
+          serviceAccountName: s3-access-sa

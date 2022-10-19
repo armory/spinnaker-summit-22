@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: ${repo_name}:${trigger['tag']}
+          image: ${parameters["repo_name"]}:${trigger['tag']}
           imagePullPolicy: Always
           ports:
             - containerPort: 80

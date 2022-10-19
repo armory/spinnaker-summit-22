@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: 133470739014.dkr.ecr.us-west-2.amazonaws.com/spinnaker-summit-22:${trigger['tag']}
+          image: ${repo_name}:${trigger['tag']}
           imagePullPolicy: Always
           ports:
             - containerPort: 80

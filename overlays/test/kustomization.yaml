@@ -1,5 +1,6 @@
 resources:
   - ../../base
+  - namespace.yml
 patchesStrategicMerge:
   - app.yaml
 namePrefix: test-

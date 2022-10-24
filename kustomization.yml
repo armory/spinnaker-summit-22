@@ -6,15 +6,15 @@ namespace: spinnaker
 components:
   - https://github.com/armory/spinnaker-kustomize-patches.git/core/base
   - https://github.com/armory/spinnaker-kustomize-patches.git/targets/kubernetes/default
-  # TODO needs docs upstream
-  - https://github.com/armory/spinnaker-kustomize-patches.git/core/persistence/s3?ref=feat/add-s3-persistance-component
+  - https://github.com/armory/spinnaker-kustomize-patches.git/core/persistence/s3
+    # TODO: needs docs upstream
   - https://github.com/armory/spinnaker-kustomize-patches.git/artifacts/docker/ecr?ref=feat/add-dockerhub-component
 
 patchesStrategicMerge:
   - ./version.yml
   - ./s3-bucket.yml
   - ./gitrepo.yml
-  #- ./load-balancer.yml
+  - ./load-balancer.yml
 
 patches:
   - target:

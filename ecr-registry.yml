@@ -8,7 +8,7 @@
 - op: replace
   path: /spec/spinnakerConfig/config/providers/dockerRegistry/accounts/0/passwordCommand
   value: |-
-    aws --region us-west-2 ecr get-authorization-token \
+    aws --region AWS_REGION ecr get-authorization-token \
         --output text --query 'authorizationData[].authorizationToken' \
       | base64 -d \
       | sed 's/^AWS://'

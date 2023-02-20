@@ -1,7 +1,24 @@
 {
+  "appConfig": {},
   "keepWaitingPipelines": false,
   "lastModifiedBy": "anonymous",
   "limitConcurrent": true,
+  "parameterConfig": [
+    {
+      "default": "123456789.dkr.ecr.us-west-2.amazonaws.com/spinnaker-summit-22",
+      "description": "",
+      "hasOptions": false,
+      "label": "",
+      "name": "repo_name",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": false,
+      "required": true
+    }
+  ],
   "schema": "1",
   "spelEvaluator": "v4",
   "stages": [
@@ -29,7 +46,7 @@
         "artifact": {
           "artifactAccount": "github",
           "customKind": true,
-          "id": "ef7237f8-b5e2-4966-aed2-ba809b20e525",
+          "id": "10b2a7f2-c5c9-4b41-a335-9597a527403e",
           "reference": "https://github.com/armory/spinnaker-summit-22.git",
           "type": "git/repo",
           "version": "main"
@@ -51,12 +68,12 @@
         "app": "spinnaker-summit-2022"
       },
       "name": "Deploy to Test Environment",
+      "namespaceOverride": "test-environment",
       "refId": "2",
       "requisiteStageRefIds": [
         "1"
       ],
       "skipExpressionEvaluation": false,
-      "namespaceOverride": "test-environment",
       "source": "artifact",
       "trafficManagement": {
         "enabled": false,
@@ -145,11 +162,11 @@
     {
       "account": "ecr",
       "enabled": true,
-      "registry": "133470739014.dkr.ecr.us-west-2.amazonaws.com",
+      "registry": "123456789.dkr.ecr.us-west-2.amazonaws.com",
       "repository": "spinnaker-summit-22",
       "tag": "",
       "type": "docker"
     }
   ],
-  "updateTs": "1665678483000"
+  "updateTs": "1676054026000"
 }
